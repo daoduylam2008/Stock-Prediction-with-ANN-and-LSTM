@@ -10,10 +10,7 @@ LR_META   = 1e-3     # learning rate for meta-model
 EPOCHS_BASE = 50     # epochs for each base model
 EPOCHS_META = 30     # epochs for meta-model
 
-if platform.system() == "Darwin":
-    DEVICE = torch.device("mps")
-else:
-    DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
 def one_epoch(model, loader, optimizer, criterion, device):

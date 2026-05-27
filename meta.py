@@ -6,7 +6,7 @@ import training
 
 
 
-def train_meta_model(meta_model, lstm_train_preds, ann_train_preds,
+def train(meta_model, lstm_train_preds, ann_train_preds,
                      y_train, lstm_val_preds, ann_val_preds, y_val,
                      epochs=training.EPOCHS_META, lr=training.LR_META):
     """
@@ -31,9 +31,7 @@ def train_meta_model(meta_model, lstm_train_preds, ann_train_preds,
     best_state = None
     train_losses, val_losses = [], []
 
-    print(f"\n{'='*50}")
     print(f"Training Meta-Model (Stacking Layer)")
-    print(f"{'='*50}")
 
     for epoch in range(1, epochs + 1):
         meta_model.train()
@@ -74,6 +72,6 @@ def train_meta_model(meta_model, lstm_train_preds, ann_train_preds,
         w = meta_model.fc.weight.cpu().numpy()[0]
         b = meta_model.fc.bias.cpu().numpy()[0]
         print(f"\n  Meta-model learned: "
-              f"β_LSTM={w[0]:.4f}, β_ANN={w[1]:.4f}, β0={b:.4f}")
+              f"LSTM={w[0]:.4f}, ANN={w[1]:.4f}, 0={b:.4f}")
 
     return meta_model, train_losses, val_losses
